@@ -1,38 +1,38 @@
 from random import choice
 
 class RandomWalk():
-    """A class to generate random walks."""
+    """一个创建随机漫步的类"""
     
     def __init__(self, num_points=5000):
-        """Initialize attributes of a walk."""
+        """基础属性"""
         self.num_points = num_points
         
         # All walks start at (0, 0).
         self.x_values = [0]
         self.y_values = [0]
 
-    def get_step(self):
-        """Determine the direction and distance for a step."""
+    def get_step(self):#此处完成了作业15.3重构的内容
+        """随机方向和距离"""#更改下面两行代码可以完成作业15.2改进随机漫步的内容
         direction = choice([1, -1])
         distance = choice([0, 1, 2, 3, 4])
         step = direction * distance
         return step
 
     def fill_walk(self):
-        """Calculate all the points in the walk."""
+        """随机漫步所有点"""
         
-        # Keep taking steps until the walk reaches the desired length.
+        # 一直漫步直到列表达到指定大小
         while len(self.x_values) < self.num_points:
             
-            # Decide which direction to go, and how far to go in that direction.
+            #获得本次随机坐标
             x_step = self.get_step()
             y_step = self.get_step()
             
-            # Reject moves that go nowhere.
+            #拒绝原地踏步
             if x_step == 0 and y_step == 0:
                 continue
             
-            # Calculate the next x and y values.
+            #在列表中加入本次随机的点
             next_x = self.x_values[-1] + x_step
             next_y = self.y_values[-1] + y_step
             
